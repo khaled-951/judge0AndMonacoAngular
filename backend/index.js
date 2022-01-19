@@ -11,11 +11,22 @@ app.get('/', (req, res) =>{
     return res.json({"data": "hello world !"});
 })
 
+app.get('/supported_languages', (req, res) => {
+    axios.get('https://judge0-ce.p.rapidapi.com/languages',{
+            headers: {
+                'content-type': 'application/json',
+                'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
+                'x-rapidapi-key': '6e1dda5cd8mshffb0dd0159dd266p113a0cjsn2dbc893a8c27'
+            }
+        }).then(response => { return res.json({data: response.data}) })
+        .catch(err => {return res.json({err})})
+})
+
 app.post('/attempt/', async (req, res) =>{
     //console.log(req.body);
     axios.post('https://judge0-ce.p.rapidapi.com/submissions', 
         {
-            language_id: 63,
+            language_id: req.body.langId,
             source_code: req.body.source_code,
             stdin: req.body.stdin,
             expected_output: req.body.expected_stdout
@@ -36,7 +47,7 @@ app.post('/attempt/', async (req, res) =>{
                 'x-rapidapi-host': 'judge0-ce.p.rapidapi.com',
                 'x-rapidapi-key': '6e1dda5cd8mshffb0dd0159dd266p113a0cjsn2dbc893a8c27'
             }
-        }).then(response => {  return res.json({ result: response.data.status.description, debug: response.data.stdout}); });
+        }).then(response => {  console.log(response); return res.json({ result: response.data.status.description, debug: response.data.stdout}); });
         //console.log(data.data.token);
         //return res.json(data.data);
     });

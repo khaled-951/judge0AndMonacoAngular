@@ -1,5 +1,8 @@
 <div>
   <h1>Programming Challenge</h1>
+  <select [(ngModel)]="selectedLanguage" >
+    <option *ngFor="let tech of supported_languages" value="{{tech.id}}">{{tech.name}}</option>
+  </select>
   <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
   <button (click)="submitCode()" >Submit Code</button>
   <input type="text" placeholder="Stdin..." value="" [(ngModel)]="stdin" >
