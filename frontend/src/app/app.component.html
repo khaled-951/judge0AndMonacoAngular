@@ -1,0 +1,11 @@
+<div>
+  <h1>Programming Challenge</h1>
+  <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+  <button (click)="submitCode()" >Submit Code</button>
+  <input type="text" placeholder="Stdin..." value="" [(ngModel)]="stdin" >
+  <input type="text" placeholder="Expected Stdout..." value="" [(ngModel)]="expected_stdout" >
+  <p >{{result}}</p>
+</div>
+<div>
+  <textarea name="codeResult" [value]="resultingCode"></textarea>
+</div>
